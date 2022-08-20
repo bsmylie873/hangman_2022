@@ -1,42 +1,21 @@
-import mysql.connector as mysql
-from mysql.connector import Error
+import sqlite3
 
-from app import app
-
-app.config.from_pyfile('config.py')
+connection = sqlite3.connect('hangman.db')
 
 # First, set up the database itself.
-try:
-    db = mysql.connect(
-        host=app.config['DB_HOST'],
-        user=app.config['DB_USER'],
-        passwd=app.config['DB_PASS']
-    )
+with open('schema.sql', 'r') as f:
+    connection.executescript(f.read())
 
-    with open('db.sql', 'r') as f:
-        with db.cursor() as cursor:
-            cursor.execute(f.read(), multi=True)
-        cursor.close()
-        db.commit()
-# Error handling
-except Error as e:
-    print("Error while connecting to MySql", e)
+# Create a cursor and prepare an insert query.
+cur = connection.cursor()
+query = "INSERT INTO words VALUES (NULL,?,7)"
 
-# Now, set up table inside hangman database.
-try:
-    db = mysql.connect(
-        host=app.config['DB_HOST'],
-        user=app.config['DB_USER'],
-        database="hangman",
-        passwd=app.config['DB_PASS']
-    )
-    print("Connection successful!")
+with open("words.txt", "r") as words:
+    for data in words:
+        line = data.split()
+        print(line)
+        if len(line) > 0:
+            cur.execute(query, line)
 
-    with open('schema.sql', 'r') as f:
-        with db.cursor() as cursor:
-            cursor.execute(f.read(), multi=True)
-        cursor.close()
-        db.commit()
-# Error handling
-except Error as e:
-    print("Error while connecting to MySql, database created", e)
+connection.commit()
+connection.close()
