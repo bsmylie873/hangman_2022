@@ -11,12 +11,12 @@ def get_db_connection():
     return conn
 
 
-@app.route('/')
-def home():
+@app.route('/cheat')
+def cheat():
     conn = get_db_connection()
     words = conn.execute('SELECT * FROM words').fetchall()
     conn.close()
-    return render_template('index.html')
+    return render_template('cheat.html', words=words)
 
 
 if __name__ == "__main__":

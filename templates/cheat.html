@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} All Words For Game {% endblock %}</h1>
+    {% for word in words %}
+        <div class='word'>
+            <h2>{{ word['Word'] }}</h2>
+        </div>
+    {% endfor %}
+{% endblock %}
