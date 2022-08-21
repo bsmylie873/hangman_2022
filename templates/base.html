@@ -4,14 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <style> h1 {text-align: center;}
+            p {text-align: center;}
+            div {text-align: center;}
+    </style>
     <title>Hangman game</title>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='bootstrap.min.css') }}">
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='main.css') }}">
   </head>
   <body>
     <div class="container text-center">
@@ -21,10 +18,11 @@
         </div>
       </div>
     </div>
-    <div class="content">
-        {% block content %} {% endblock %}
+  <div class="container text-center">
+      <form name="game_form" id= "game_form" action="{{url_for('start_game')}}" method = "POST">
+        <p>Game ID: <input type = "number" min="0" step="1" id = "game_id" name="game_id" /></p>
+        <p><input type = "submit" value = "Submit" /></p>
+      </form>
     </div>
-    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
   </body>
 </html>

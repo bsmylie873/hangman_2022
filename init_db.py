@@ -8,7 +8,7 @@ with open('schema.sql', 'r') as f:
 
 # Create a cursor and prepare an insert query.
 cur = connection.cursor()
-query = "INSERT INTO words VALUES (NULL,?,7)"
+query = "INSERT INTO Words VALUES (NULL,?,7)"
 
 with open("words.txt", "r") as words:
     for data in words:

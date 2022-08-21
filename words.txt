@@ -375,7 +375,6 @@ Daycare
 Daytime
 Decades
 Deceive
-Declare
 Decibel
 Decimal
 Declare
@@ -691,6 +690,7 @@ Islamic
 Islands
 Isolate
 Itemize
+Jacuzzi
 Jamaica
 January
 Jasmine
@@ -1179,7 +1179,6 @@ Suicide
 Sulphur
 Summary
 Sunbath
-Sunbelt
 Sunbeam
 Sunbelt
 Sunburn
@@ -1344,6 +1343,7 @@ Waffles
 Walnuts
 Warbler
 Warfare
+Warlock
 Warrior
 Washers
 Wealthy
