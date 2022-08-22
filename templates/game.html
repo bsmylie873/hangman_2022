@@ -7,7 +7,12 @@
     <style> h1 {text-align: center;}
             p {text-align: center;}
             div {text-align: center;}
-
+            code {
+                    font-family: Consolas,"courier new";
+                    background-color: #f1f1f1;
+                    padding: 10px;
+                    font-size: 105%;
+                }
     </style>
     <title>Hangman Game</title>
 </head>
@@ -19,5 +24,44 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-8">
+        {% if game_details.no_of_guesses == 6 %}
+        <img src="/static/img/HangMan-6.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 5 %}
+        <img src="/static/img/HangMan-5.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 4 %}
+        <img src="/static/img/HangMan-4.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 3 %}
+        <img src="/static/img/HangMan-3.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 2 %}
+        <img src="/static/img/HangMan-2.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 1 %}
+        <img src="/static/img/HangMan-1.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 0 %}
+        <img src="/static/img/HangMan-0.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+    </div>
+    <div class="container text-center">
+        <pre>{{ game_details.word_progress }}</pre>
+    </div>
+    <div class="container text-center">
+        <p>Word Length: {{ game_details.word_length}}</p>
+        <p>Guesses Left: {{ game_details.word_length - game_details.no_of_guesses - 1 }}</p>
+    </div>
+    <div class="container text-center">
+        <form name="game_form" id="game_form"
+              action="{{ url_for('add_char', game_id=game_details.game_id) }}" method="POST">
+            <p>Enter a capital letter: <input type="text" onkeyup="this.value = this.value.replace(/[^A-Z]/, '')"
+                                              maxlength="1" id="letter" name="letter"/>
+                <input type="submit" value="Submit"/></p>
+        </form>
+    </div>
 </body>
 </html>

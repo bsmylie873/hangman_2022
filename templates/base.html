@@ -8,11 +8,11 @@
             p {text-align: center;}
             div {text-align: center;}
     </style>
-    <title>Hangman game</title>
+    <title>Hangman Game</title>
   </head>
   <body>
     <div class="container text-center">
-      <h1>Hangman game</h1>
+      <h1>Hangman Game</h1>
       <div class="row vspace">
         <div class="col-md-6 col-md-offset-3">
         </div>
@@ -20,8 +20,7 @@
     </div>
   <div class="container text-center">
       <form name="game_form" id= "game_form" action="{{url_for('start_game')}}" method = "POST">
-        <p>Game ID: <input type = "number" min="0" step="1" id = "game_id" name="game_id" /></p>
-        <p><input type = "submit" value = "Submit" /></p>
+        <p>Game ID: <input type = "number" min="0" step="1" id = "game_id" name="game_id" /> <input type = "submit" value = "Submit" /></p>
       </form>
     </div>
   </body>
