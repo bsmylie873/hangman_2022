@@ -13,12 +13,39 @@
 </head>
 <body>
 <div class="container text-center">
-    <h1>You win!</h1>
+    <h1>You won!</h1>
     <div class="row vspace">
         <div class="col-md-6 col-md-offset-3">
         </div>
     </div>
 </div>
+<div class="row">
+     <div class="col-lg-8">
+        {% if game_details.no_of_guesses == 6 %}
+        <img src="/static/img/HangMan-6.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 5 %}
+        <img src="/static/img/HangMan-5.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 4 %}
+        <img src="/static/img/HangMan-4.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 3 %}
+        <img src="/static/img/HangMan-3.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 2 %}
+        <img src="/static/img/HangMan-2.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 1 %}
+        <img src="/static/img/HangMan-1.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+        {% if game_details.no_of_guesses == 0 %}
+        <img src="/static/img/HangMan-0.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+    </div>
+    <div class="container text-center">
+        <pre>{{ game_details.word_progress }}</pre>
+    </div>
 <div class="container text-center">
     <form action="/">
         <input type="submit" value="Go to Home Page"/>

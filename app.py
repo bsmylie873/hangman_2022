@@ -106,7 +106,7 @@ def add_char(game_id):
     # TODO: This prevents the user from viewing the hangman image as they lose, and so will need to be changed.
     if hangman_game.game_valid:
         if hangman_game.check_game_won():
-            return redirect(url_for('win'))
+            return redirect(url_for('win', game_id=game_id, hangman_game=hangman_game))
         return redirect(url_for('game', game_id=game_id, hangman_game=hangman_game))
     else:
         time.sleep(2)
@@ -120,9 +120,9 @@ def loss():
 
 
 # Render win page.
-@app.route('/win/')
-def win():
-    return render_template('win.html')
+@app.route('/win/<game_id>')
+def win(game_id):
+    return render_template('win.html', game_id=game_id, game_details=hangman_game)
 
 
 # Run app.
