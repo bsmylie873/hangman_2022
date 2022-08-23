@@ -48,3 +48,8 @@ class Hangman:
         if self.no_of_guesses >= self.word_length - 1:
             self.game_valid = False
         return self.game_valid
+
+    # Method to check if current game has been won or not by comparing and progress and word.
+    def check_game_won(self):
+        if self.word_progress == self.word:
+            return True

@@ -1,5 +1,7 @@
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, abort
+import time
+
+from flask import Flask, render_template, request, redirect, url_for, abort, flash
 from hangman import Hangman
 from random_functions import *
 
@@ -7,7 +9,7 @@ from random_functions import *
 app = Flask(__name__)
 
 # Initialise Hangman object.
-hangman_game = Hangman(game_id=0, word="______", word_progress="______", word_length=7, no_of_guesses=0,
+hangman_game = Hangman(game_id=0, word="", word_progress="", word_length=0, no_of_guesses=0,
                        game_valid=True)
 
 
@@ -77,7 +79,8 @@ def start_game():
     if hangman_game.check_game_state():
         return redirect(url_for('game', game_id=game_id))
     else:
-        return render_template("loss.html")
+        time.sleep(2)
+        return redirect(url_for('loss'))
 
 
 # Redirect to game screen, which renders game page.
@@ -98,11 +101,26 @@ def add_char(game_id):
     # Check if game is still valid, parameter game_valid will be updated.
     hangman_game.game_valid = hangman_game.check_game_state()
 
-    # If game is valid, redirect to game page, otherwise redirect to loss screen.
+    # If game is valid, check if game has been won. If not, redirect to game page, otherwise redirect to loss screen.
     if hangman_game.game_valid:
+        if hangman_game.check_game_won():
+            return redirect(url_for('win'))
         return redirect(url_for('game', game_id=game_id, hangman_game=hangman_game))
     else:
-        return redirect(url_for('index'))
+        time.sleep(2)
+        return redirect(url_for('loss'))
+
+
+# Render loss page.
+@app.route('/loss/')
+def loss():
+    return render_template('loss.html')
+
+
+# Render win page.
+@app.route('/win/')
+def win():
+    return render_template('win.html')
 
 
 # Run app.
