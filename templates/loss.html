@@ -20,8 +20,13 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-8">
-        <img src="/static/img/HangMan-6.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+     <div class="col-lg-8">
+        {% if game_details.no_of_guesses == 6 %}
+         <img src="/static/img/HangMan-6.svg" height="10%" width="20%" alt="Banner" class="img-responsive">
+        {% endif %}
+    </div>
+    <div class="container text-center">
+        <pre>Word: {{ game_details.word }}</pre>
     </div>
 <div class="container text-center">
     <form action="/">

@@ -80,7 +80,6 @@ def start_game():
     if hangman_game.check_game_state():
         return redirect(url_for('game', game_id=game_id))
     else:
-        time.sleep(2)
         return redirect(url_for('loss'))
 
 
@@ -96,6 +95,10 @@ def add_char(game_id):
     # Retrieve guess from POST request.
     letter = request.form['letter']
 
+    # Check guess is not empty
+    if letter == '':
+        return render_template("game.html", game_id=game_id, game_details=hangman_game)
+
     # Process guess to check if it is valid or not. This will return an altered object.
     hangman_game.process_guess(letter)
 
@@ -110,13 +113,13 @@ def add_char(game_id):
         return redirect(url_for('game', game_id=game_id, hangman_game=hangman_game))
     else:
         time.sleep(2)
-        return redirect(url_for('loss'))
+        return redirect(url_for('loss', game_id=game_id, hangman_game=hangman_game))
 
 
 # Render loss page.
-@app.route('/loss/')
-def loss():
-    return render_template('loss.html')
+@app.route('/loss/<game_id>')
+def loss(game_id):
+    return render_template('loss.html', game_id=game_id, game_details=hangman_game)
 
 
 # Render win page.
