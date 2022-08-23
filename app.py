@@ -5,11 +5,12 @@ from flask import Flask, render_template, request, redirect, url_for, abort, fla
 from hangman import Hangman
 from random_functions import *
 
-# Assign Flask app.
+# Assign Flask app and load config file.
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
 
 # Initialise Hangman object.
-hangman_game = Hangman(game_id=0, word="", word_progress="", word_length=0, no_of_guesses=0,
+hangman_game = Hangman(game_id=0, word="", word_progress="_", word_length=0, no_of_guesses=0,
                        game_valid=True)
 
 
@@ -102,6 +103,7 @@ def add_char(game_id):
     hangman_game.game_valid = hangman_game.check_game_state()
 
     # If game is valid, check if game has been won. If not, redirect to game page, otherwise redirect to loss screen.
+    # TODO: This prevents the user from viewing the hangman image as they lose, and so will need to be changed.
     if hangman_game.game_valid:
         if hangman_game.check_game_won():
             return redirect(url_for('win'))
