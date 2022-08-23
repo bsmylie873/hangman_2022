@@ -106,7 +106,6 @@ def add_char(game_id):
     hangman_game.game_valid = hangman_game.check_game_state()
 
     # If game is valid, check if game has been won. If not, redirect to game page, otherwise redirect to loss screen.
-    # TODO: This prevents the user from viewing the hangman image as they lose, and so will need to be changed.
     if hangman_game.game_valid:
         if hangman_game.check_game_won():
             return redirect(url_for('win', game_id=game_id, hangman_game=hangman_game))
