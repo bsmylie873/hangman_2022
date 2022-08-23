@@ -1,8 +1,9 @@
 import sqlite3
 
+# Create connection to database.
 connection = sqlite3.connect('hangman.db')
 
-# First, set up the database itself.
+# Set up the database itself.
 with open('schema.sql', 'r') as f:
     connection.executescript(f.read())
 
@@ -10,6 +11,7 @@ with open('schema.sql', 'r') as f:
 cur = connection.cursor()
 query = "INSERT INTO Words VALUES (NULL,?,7)"
 
+# Read local text document, check if current line is valid, if so then execute query with current line data.
 with open("words.txt", "r") as words:
     for data in words:
         line = data.split()
@@ -17,5 +19,6 @@ with open("words.txt", "r") as words:
         if len(line) > 0:
             cur.execute(query, line)
 
+# Commit changes and close connection.
 connection.commit()
 connection.close()
