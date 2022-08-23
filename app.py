@@ -95,8 +95,12 @@ def add_char(game_id):
     # Retrieve guess from POST request.
     letter = request.form['letter']
 
-    # Check guess is not empty
+    # Check guess is not empty.
     if letter == '':
+        return render_template("game.html", game_id=game_id, game_details=hangman_game)
+
+    # Check guess is of alphabet type.
+    if not letter.isalpha():
         return render_template("game.html", game_id=game_id, game_details=hangman_game)
 
     # Process guess to check if it is valid or not. This will return an altered object.
