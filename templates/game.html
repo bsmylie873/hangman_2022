@@ -58,7 +58,7 @@
     <div class="container text-center">
         <form name="game_form" id="game_form"
               action="{{ url_for('add_char', game_id=game_details.game_id) }}" method="POST">
-            <p>Enter a capital letter: <input type="text" onkeyup="this.value = this.value.replace(/[^A-Z]/, '')"
+            <p>Enter a capital letter: <input type="text" onkeyup="this.value = this.value.replace(/[^A-Za-z]/, '')"
                                               maxlength="1" id="letter" name="letter"/>
                 <input type="submit" value="Submit"/></p>
         </form>

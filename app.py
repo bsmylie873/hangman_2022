@@ -111,7 +111,6 @@ def add_char(game_id):
             return redirect(url_for('win', game_id=game_id, hangman_game=hangman_game))
         return redirect(url_for('game', game_id=game_id, hangman_game=hangman_game))
     else:
-        time.sleep(2)
         return redirect(url_for('loss', game_id=game_id, hangman_game=hangman_game))
 
 
